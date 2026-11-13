@@ -4,7 +4,33 @@
   <style>.portrait-frame{position:relative;width:170px;height:170px;border-radius:50%;overflow:hidden;border:5px solid #fff;box-shadow:0 2px 12px #0002}.portrait-frame .avatar{position:absolute;width:100%;height:100%;max-width:none;left:0;top:0;border:0;border-radius:0;box-shadow:none;object-fit:cover;object-position:center 28%}@media(max-width:720px){.portrait-frame{width:120px;height:120px}}</style><script>document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){var img=document.querySelector(".sidebar img.avatar");if(img){var frame=document.createElement("div");frame.className="portrait-frame";img.before(frame);frame.appendChild(img)}},0)});</script>
   <style>.sidebar .avatar{object-position:50% 28%;display:block}</style><script>document.addEventListener("DOMContentLoaded",function(){var img=document.createElement("img");img.src="/avatar.svg?v=2";img.alt="Hao Liu";img.className="avatar";document.querySelector(".sidebar").prepend(img)});</script>
   <style>#travel-conferences{display:none}</style><script>document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){var isTravel=new URLSearchParams(location.search).get("page")==="travel-conferences";var links=document.querySelectorAll(".nav a");links.forEach(function(a){var h=a.getAttribute("href");if(h==="#travel-conferences")a.setAttribute("href","/?page=travel-conferences");else if(isTravel&&h&&h.charAt(0)==="#")a.setAttribute("href","/"+h)});if(isTravel){var intro=document.querySelector(".main .intro");if(intro)intro.style.display="none";document.querySelectorAll(".main>section").forEach(function(s){s.style.display=s.id==="travel-conferences"?"block":"none"});document.title="Travel & Conferences | Hao Liu"}},0)});</script>
-<script>document.addEventListener("DOMContentLoaded",function(){var nav=document.querySelector(".nav");var a=document.createElement("a");a.href="#travel-conferences";a.textContent="Travel & Conferences";nav.appendChild(a);var section=document.createElement("section");section.id="travel-conferences";var h=document.createElement("h2");h.textContent="📸 Travel & Conferences";var p=document.createElement("p");p.textContent="Photos from travels and conferences will be shared here.";p.style.color="#75808a";section.append(h,p);document.querySelector(".main footer").before(section)});</script>
+<style>
+.travel-intro{color:#657487;margin:0 0 24px;line-height:1.65}
+.travel-timeline{border-left:2px solid #e2eaf1;margin-left:7px;padding-left:24px;display:grid;gap:16px}
+.travel-card{position:relative;border:1px solid #e2eaf1;border-radius:10px;padding:17px 20px;background:#fff;box-shadow:0 2px 10px rgba(36,61,85,.04)}
+.travel-card:before{content:"";position:absolute;left:-31px;top:24px;width:10px;height:10px;border-radius:50%;background:#527aa0;border:3px solid #fff}
+.travel-meta{font-size:12px;color:#728194;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.travel-card h3{font-size:17px;margin:5px 0;color:#263b50}
+.travel-card p{margin:0;color:#637181;font-size:14px;line-height:1.55}
+.travel-card a{color:#315c8a}
+@media(max-width:720px){.travel-timeline{padding-left:18px}.travel-card{padding:14px}.travel-card:before{left:-25px}}
+</style>
+<script>document.addEventListener("DOMContentLoaded",function(){
+var nav=document.querySelector(".nav"),a=document.createElement("a");a.href="#travel-conferences";a.textContent="Travel & Conferences";nav.appendChild(a);
+var section=document.createElement("section");section.id="travel-conferences";
+var heading=document.createElement("h2");heading.textContent="📸 Travel & Conferences";section.appendChild(heading);
+var intro=document.createElement("p");intro.className="travel-intro";intro.textContent="A collection of conferences, journeys, and meaningful moments. Photos will be added over time.";section.appendChild(intro);
+var list=document.createElement("div");list.className="travel-timeline";
+var items=[
+{date:"October 2026",category:"Conference",title:"ICICS 2026",place:"Fukui, Japan",url:"https://sulab-sever.u-aizu.ac.jp/icics2026/"},
+{date:"October 2026",category:"Life",title:"Wedding & Honeymoon",place:"A special new chapter."},
+{date:"August 2025",category:"Travel",title:"Chengdu",place:"Sichuan, China"},
+{date:"July 2025",category:"Conference",title:"IEEE INDIN 2025",place:"Kunming, China",url:"https://indin2025.ieee-ies.org/"},
+{date:"June 2024",category:"Conference",title:"Cybersecurity Conference",place:"Wuhan, China"},
+{date:"May 2024",category:"Visit",title:"Doctoral Visit",place:"Taiyuan, China"}
+];
+items.forEach(function(item){var card=document.createElement("article");card.className="travel-card";var meta=document.createElement("div");meta.className="travel-meta";meta.textContent=item.date+" · "+item.category;var title=document.createElement("h3");if(item.url){var link=document.createElement("a");link.href=item.url;link.target="_blank";link.rel="noopener noreferrer";link.textContent=item.title;title.appendChild(link)}else title.textContent=item.title;var place=document.createElement("p");place.textContent=item.place;card.append(meta,title,place);list.appendChild(card)});section.appendChild(list);document.querySelector(".main footer").before(section)});
+</script>
   <style>.sidebar p:not(.role){min-height:28px;margin:9px 0;gap:9px}.sidebar p:not(.role) .icon{width:25px;height:25px;flex:0 0 25px;margin-right:0}.sidebar p.location-line:before{content:"";display:block;width:25px;height:25px;flex:0 0 25px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%2348535e%22%20d%3D%22M12%202a7%207%200%200%200-7%207c0%205.2%207%2013%207%2013s7-7.8%207-13a7%207%200%200%200-7-7Zm0%209.8a2.8%202.8%200%201%201%200-5.6%202.8%202.8%200%200%201%200%205.6Z%22%2F%3E%3C%2Fsvg%3E") center/22px 22px no-repeat}</style><script>document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){var p=Array.from(document.querySelectorAll(".sidebar p")).find(function(x){return x.textContent.includes("Nanjing / Hong Kong")});if(p){p.classList.add("location-line");p.textContent="Nanjing / Hong Kong"}},0)});</script>
   <script>document.addEventListener("DOMContentLoaded",function(){var p=document.createElement("p");p.textContent="📍 Nanjing / Hong Kong";p.style.cssText="font-size:14px;color:#48535e;margin-top:12px";document.querySelector(".sidebar").appendChild(p)});</script>
 <script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".sidebar p").forEach(function(p){p.childNodes.forEach(function(n){if(n.nodeType===3){n.nodeValue=n.nodeValue.replace("Southeast University","SEU").replace("City University of Hong Kong","CityU HK")}})})});</script>
