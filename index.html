@@ -26,8 +26,10 @@ var items=[
 {date:"October 2026",category:"Life",title:"Wedding & Honeymoon",place:"A special new chapter."},
 {date:"August 2025",category:"Travel",title:"Chengdu",place:"Sichuan, China"},
 {date:"July 2025",category:"Conference",title:"IEEE INDIN 2025",place:"Kunming, China",url:"https://indin2025.ieee-ies.org/"},
+{date:"September 2024 – December 2026",category:"Experience",title:"City University of Hong Kong",place:"Hong Kong"},
 {date:"June 2024",category:"Conference",title:"Cybersecurity Conference",place:"Wuhan, China"},
-{date:"May 2024",category:"Visit",title:"Doctoral Visit",place:"Taiyuan, China"}
+{date:"May 2024",category:"Visit",title:"Doctoral Visit",place:"Taiyuan, China"},
+{date:"April 2023 – February 2024",category:"Experience",title:"Zhejiang Lab",place:"Zhejiang, China"}
 ];
 items.forEach(function(item){var card=document.createElement("article");card.className="travel-card";var meta=document.createElement("div");meta.className="travel-meta";meta.textContent=item.date+" · "+item.category;var title=document.createElement("h3");if(item.url){var link=document.createElement("a");link.href=item.url;link.target="_blank";link.rel="noopener noreferrer";link.textContent=item.title;title.appendChild(link)}else title.textContent=item.title;var place=document.createElement("p");place.textContent=item.place;card.append(meta,title,place);list.appendChild(card)});section.appendChild(list);document.querySelector(".main footer").before(section)});
 </script>
