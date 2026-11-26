@@ -81,26 +81,24 @@ document.addEventListener("DOMContentLoaded",function(){
   main.querySelectorAll(":scope > section").forEach(s=>s.style.display="none");
   nav.querySelectorAll('a[href^="#"]').forEach(a=>a.setAttribute("href","/"+a.getAttribute("href")));
   const section=document.createElement("section");section.id="collaborations";
-  section.innerHTML='<h2>🌍 Research Collaborations</h2><p class="collab-intro">A selection of research collaborations based on co-authored publications. Select a location to explore institutions, collaborators, and supporting publications.</p><div class="collab-map" aria-label="Map of research collaboration locations"><p class="collab-note" style="padding:14px">Loading map…</p></div><div class="collab-grid" aria-label="Collaboration locations"></div><div class="collab-detail" aria-live="polite"></div><p class="collab-note">Locations reflect affiliations listed on the linked publications, rather than collaborators’ current affiliations. This is a selection, not a complete list. Map data: Natural Earth via world-atlas.</p>';
+  section.innerHTML='<h2>🌍 Research Collaborations</h2><p class="collab-intro">A selection of research collaborations based on co-authored publications. Select a location to explore institutions and supporting publications.</p><div class="collab-map" aria-label="Map of research collaboration locations"><p class="collab-note" style="padding:14px">Loading map…</p></div><div class="collab-grid" aria-label="Collaboration locations"></div><div class="collab-detail" aria-live="polite"></div><p class="collab-note">Locations reflect affiliations listed on the linked publications, rather than collaborators’ current affiliations. This is a selection, not a complete list. Map data: Natural Earth via world-atlas.</p>';
   main.querySelector("footer").before(section);
   const data=[
-   {city:"Nanjing",region:"Jiangsu, China",coord:[118.7969,32.0603],entries:[
-    {org:"Southeast University",people:"Liquan Chen",paper:"A systematic review of semantic firmware bugs and security challenges in distributed industrial cyber-physical systems",url:"https://journal.hep.com.cn/fcs/EN/10.1007/s11704-026-51802-9"},
-    {org:"Nanjing University of Aeronautics and Astronautics",people:"Lu Zhou",paper:"A systematic review of semantic firmware bugs and security challenges in distributed industrial cyber-physical systems",url:"https://journal.hep.com.cn/fcs/EN/10.1007/s11704-026-51802-9"},
-    {org:"Nanjing University of Aeronautics and Astronautics",people:"Yongchao Zhang",paper:"Multigranularity semantics based vulnerability search method for cross-platform binary",url:"https://doi.org/10.1002/int.22436"}]},
+   {city:"Chinese Mainland",region:"China",coord:[104.0,35.0],entries:[
+    {org:"Southeast University",paper:"A systematic review of semantic firmware bugs and security challenges in distributed industrial cyber-physical systems",url:"https://journal.hep.com.cn/fcs/EN/10.1007/s11704-026-51802-9"},
+    {org:"Nanjing University of Aeronautics and Astronautics",paper:"A systematic review of semantic firmware bugs and security challenges in distributed industrial cyber-physical systems",url:"https://journal.hep.com.cn/fcs/EN/10.1007/s11704-026-51802-9"},
+    {org:"Nanjing University of Aeronautics and Astronautics",paper:"Multigranularity semantics based vulnerability search method for cross-platform binary",url:"https://doi.org/10.1002/int.22436"},
+    {org:"Peng Cheng Laboratory",paper:"A systematic review of semantic firmware bugs and security challenges in distributed industrial cyber-physical systems",url:"https://journal.hep.com.cn/fcs/EN/10.1007/s11704-026-51802-9"},
+    {org:"Northwest Normal University",paper:"Multigranularity semantics based vulnerability search method for cross-platform binary",url:"https://doi.org/10.1002/int.22436"}]},
    {city:"Hong Kong",region:"China",coord:[114.1694,22.3193],entries:[
-    {org:"City University of Hong Kong",people:"Bruno Silva, Raphael Elikplim Nkrow, Dutliff Boshoff, Gerhard Petrus Hancke",paper:"A systematic review of semantic firmware bugs and security challenges in distributed industrial cyber-physical systems",url:"https://journal.hep.com.cn/fcs/EN/10.1007/s11704-026-51802-9"}]},
-   {city:"Shenzhen",region:"Guangdong, China",coord:[114.0579,22.5431],entries:[
-    {org:"Peng Cheng Laboratory",people:"Yucheng Liu",paper:"A systematic review of semantic firmware bugs and security challenges in distributed industrial cyber-physical systems",url:"https://journal.hep.com.cn/fcs/EN/10.1007/s11704-026-51802-9"}]},
-   {city:"Lanzhou",region:"Gansu, China",coord:[103.8343,36.0611],entries:[
-    {org:"Northwest Normal University",people:"Huifang Ma",paper:"Multigranularity semantics based vulnerability search method for cross-platform binary",url:"https://doi.org/10.1002/int.22436"}]}
+    {org:"City University of Hong Kong",paper:"A systematic review of semantic firmware bugs and security challenges in distributed industrial cyber-physical systems",url:"https://journal.hep.com.cn/fcs/EN/10.1007/s11704-026-51802-9"}]}
   ];
   const grid=section.querySelector(".collab-grid"),detail=section.querySelector(".collab-detail");
   function show(i){
    grid.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-pressed",String(i===j)));
    const item=data[i];detail.replaceChildren();
    const h=document.createElement("h3");h.textContent=item.city+" · "+item.region;detail.appendChild(h);
-   item.entries.forEach(e=>{const p=document.createElement("p"),org=document.createElement("strong"),a=document.createElement("a");org.textContent=e.org; p.append(org,document.createElement("br"),"Collaborator(s): "+e.people,document.createElement("br"));a.href=e.url;a.target="_blank";a.rel="noopener noreferrer";a.textContent=e.paper;p.append(a);detail.append(p)});
+   item.entries.forEach(e=>{const p=document.createElement("p"),org=document.createElement("strong"),a=document.createElement("a");org.textContent=e.org; p.append(org,document.createElement("br"));a.href=e.url;a.target="_blank";a.rel="noopener noreferrer";a.textContent=e.paper;p.append(a);detail.append(p)});
   }
   data.forEach((d,i)=>{let b=document.createElement("button");b.type="button";b.className="collab-place";b.innerHTML="<strong></strong><span></span>";b.querySelector("strong").textContent=d.city;b.querySelector("span").textContent=d.region;b.onclick=()=>show(i);grid.append(b)});show(0);
   const map=section.querySelector(".collab-map");
@@ -110,7 +108,7 @@ document.addEventListener("DOMContentLoaded",function(){
    map.replaceChildren();const svg=d3.select(map).append("svg").attr("viewBox","0 0 900 430").attr("role","img").attr("aria-label","World map showing selected research collaborations");
    const projection=d3.geoNaturalEarth1().fitExtent([[10,10],[890,420]],{type:"Sphere"}); const path=d3.geoPath(projection);
    svg.append("path").datum(topojson.feature(world,world.objects.land)).attr("class","land").attr("d",path);
-   const offsets=[[0,0],[8,6],[-8,-6],[0,0]];
+   const offsets=[[0,0],[0,0]];
    data.forEach((d,i)=>{const point=projection(d.coord);const g=svg.append("g").attr("transform","translate("+(point[0]+offsets[i][0])+","+(point[1]+offsets[i][1])+")");g.append("circle").attr("class","pin").attr("r",7).attr("tabindex",0).attr("role","button").attr("aria-label",d.city+", "+d.region).on("click",()=>show(i)).on("keydown",function(event){if(event.key==="Enter"||event.key===" "){event.preventDefault();show(i)}});g.append("title").text(d.city);});
   }).catch(fail);
  },20);
